@@ -98,6 +98,8 @@ Add following scripts to `package.json`
 
 Create `src/blocks/block-test/index.jsx`
 ```js
+import React from 'react';
+
 const { registerBlockType} = wp.blocks;
 const { RichText, InnerBlocks } = wp.editor;
 const { __ } = wp.i18n;

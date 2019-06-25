@@ -1,5 +1,4 @@
 import React from 'react';
-import PropTypes from 'prop-types';
 
 const { registerBlockType } = window.wp.blocks;
 const { RichText } = window.wp.editor;
