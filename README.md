@@ -22,7 +22,7 @@ if ( ! defined( 'ABSPATH' ) ) {
 function exampleplugin_register() {
 	wp_register_script(
 		'exampleplugin-script',
-    plugins_url('/build/editor-script.js', __FILE__ ),
+    plugins_url('/build/index_bundle.js', __FILE__ ),
     array('wp-blocks', 'wp-components', 'wp-element', 'wp-editor', 'wp-i18n')
   );
 
@@ -52,6 +52,7 @@ function exampleplugin_register() {
 }
 
 add_action( 'enqueue_block_editor_assets', 'exampleplugin_register' );
+
 ```
 
 Create `webpack.config.js`
@@ -84,5 +85,51 @@ Create `.babelrc` at the root
 {
   "presets": ["@babel/preset-env", "@babel/preset-react"]
 }
+
+```
+
+Add following scripts to `package.json`
+```json
+"scripts": {
+  "build": "webpack --mode production",
+  "build:dev": "webpack --mode development --watch"
+}
+```
+
+Create `src/index.js`
+```js
+const { registerBlockType} = wp.blocks;
+const { RichText, InnerBlocks } = wp.editor;
+const { __ } = wp.i18n;
+
+registerBlockType('testplugin/foobar', {
+  title: __('Hello world'),
+  description: __('A basic div container'),
+  icon: 'layout',
+  category: 'common',
+  attributes: {
+    content: {
+      type: 'array',
+      source: 'children',
+      selector: 'div',
+    },
+  },
+
+  edit: ( props ) => (
+    <div>
+      <RichText
+        className={ props.className }
+        tagName='div'
+        onChange={ (content) => props.setAttributes({ content }) }
+      />
+    </div>
+  ),
+  save: (props) => (
+    <RichText.Content
+      tagName='div'
+      value={ props.attributes.content }
+    />
+  )
+});
 
 ```

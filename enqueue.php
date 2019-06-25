@@ -12,7 +12,7 @@ if ( ! defined( 'ABSPATH' ) ) {
 function exampleplugin_register() {
 	wp_register_script(
 		'exampleplugin-script',
-    plugins_url('/build/editor-script.js', __FILE__ ),
+    plugins_url('/build/index_bundle.js', __FILE__ ),
     array('wp-blocks', 'wp-components', 'wp-element', 'wp-editor', 'wp-i18n')
   );
 
