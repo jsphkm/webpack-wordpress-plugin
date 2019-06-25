@@ -71,7 +71,7 @@ module.exports = {
       },
     ],
   },
-  entry: './src/index.jsx',
+  entry: './src/index.js',
   output: {
     path: path.resolve(__dirname, './build'),
     filename: 'index_bundle.js',
@@ -96,7 +96,7 @@ Add following scripts to `package.json`
 }
 ```
 
-Create `src/index.jsx`
+Create `src/blocks/block-test/index.jsx`
 ```js
 const { registerBlockType} = wp.blocks;
 const { RichText, InnerBlocks } = wp.editor;
@@ -134,7 +134,26 @@ registerBlockType('testplugin/foobar', {
 
 ```
 
+Create `src/index.js`
+```js
+import './blocks/block-test/index.jsx';
+
+```
+
 Install `react` and `prop-types`
 ```sh
 yarn add react prop-types
+```
+
+Add `.eslintrc`
+```json
+{
+  "parserOptions": {
+    "ecmaVersion": 7,
+    "sourceType": "module",
+    "ecmaFeatures": {
+      "jsx": true
+    }
+  }
+}
 ```
