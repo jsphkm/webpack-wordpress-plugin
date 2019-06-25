@@ -10,7 +10,7 @@ Create `enqueue.php` at root
 ```php
 <?php
 /**
- * Plugin Name: Example Plugin
+ * Plugin Name: Test Plugin
  * Description: A description of this plugin
  */
 
@@ -19,7 +19,7 @@ if ( ! defined( 'ABSPATH' ) ) {
   exit;
 };
 
-function exampleplugin_register() {
+function testplugin_register() {
 	wp_register_script(
 		'exampleplugin-script',
     plugins_url('/build/index_bundle.js', __FILE__ ),
@@ -42,16 +42,16 @@ function exampleplugin_register() {
     filemtime( plugin_dir_path( __FILE__ ) . '/blocks/editor-style.css' )
   );
 
-  register_block_type( 'exampleplugin/containerblock', array(
-    'editor_script' => 'exampleplugin-script',
-    'editor_style' => 'exampleplugin-editorstyle',
-    'style' => 'exampleplugin-globalstyle',
+  register_block_type( 'testplugin/foobar', array(
+    'editor_script' => 'testplugin-script',
+    'editor_style' => 'testplugin-editorstyle',
+    'style' => 'testplugin-globalstyle',
   ));
 
-  wp_enqueue_script('exampleplugin-script');
+  wp_enqueue_script('testplugin-script');
 }
 
-add_action( 'enqueue_block_editor_assets', 'exampleplugin_register' );
+add_action( 'enqueue_block_editor_assets', 'testplugin_register' );
 
 ```
 
@@ -71,7 +71,7 @@ module.exports = {
       },
     ],
   },
-  entry: './src/index.js',
+  entry: './src/index.jsx',
   output: {
     path: path.resolve(__dirname, './build'),
     filename: 'index_bundle.js',
@@ -96,7 +96,7 @@ Add following scripts to `package.json`
 }
 ```
 
-Create `src/index.js`
+Create `src/index.jsx`
 ```js
 const { registerBlockType} = wp.blocks;
 const { RichText, InnerBlocks } = wp.editor;
@@ -132,4 +132,9 @@ registerBlockType('testplugin/foobar', {
   )
 });
 
+```
+
+Install `react` and `prop-types`
+```sh
+yarn add react prop-types
 ```

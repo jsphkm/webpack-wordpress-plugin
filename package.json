@@ -17,5 +17,9 @@
   "scripts": {
     "build": "webpack --mode production",
     "build:dev": "webpack --mode development --watch"
+  },
+  "dependencies": {
+    "prop-types": "^15.7.2",
+    "react": "^16.8.6"
   }
 }
